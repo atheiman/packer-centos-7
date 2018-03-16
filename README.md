@@ -1,57 +1,29 @@
-# Packer Example - CentOS 7 minimal Vagrant Box using Ansible provisioner
+# Packer Examples
 
-**Current CentOS Version Used**: 7.4 (1708)
+This is a collection of [Packer](https://www.packer.io/) machine image builder examples.
 
-**Pre-built Vagrant Box**:
+## [centos-7-minimal](./centos-7-minimal)
 
-  - [`vagrant init geerlingguy/centos7`](https://vagrantcloud.com/geerlingguy/boxes/centos7)
-  - See older versions: http://files.midwesternmac.com/
+Minimal CentOS 7 image built in VirtualBox from a `.iso` image and a kickstart config file.
 
-This example build configuration installs and configures CentOS 7 x86_64 minimal using Ansible, and then generates two Vagrant box files, for:
+## ubuntu-1604-minimal
 
-  - VirtualBox
-  - VMware
+Minimal Ubuntu 16.04 LTS image built in VirtualBox from a `.iso` image and a kickstart config file.
+https://releases.ubuntu.com/16.04/ubuntu-16.04.4-server-amd64.iso
+0a03608988cfd2e50567990dc8be96fb3c501e198e2e6efcb846d89efc7b89f2
 
-The example can be modified to use more Ansible roles, plays, and included playbooks to fully configure (or partially) configure a box file suitable for deployment for development environments.
+## centos-7-hardened
 
-## Requirements
+Minimal CentOS 7 image built in VirtualBox from a `.iso` image and a kickstart config file that builds filesystems and disks according to [CIS Benchmark specifications](https://www.cisecurity.org/cis-benchmarks/).
 
-The following software must be installed/present on your local machine before you can use Packer to build the Vagrant box file:
+## ubuntu-1604-hardened
 
-  - [Packer](http://www.packer.io/)
-  - [Vagrant](http://vagrantup.com/)
-  - [VirtualBox](https://www.virtualbox.org/) (if you want to build the VirtualBox box)
-  - [VMware Fusion](http://www.vmware.com/products/fusion/) (or Workstation - if you want to build the VMware box)
-  - [Ansible](http://docs.ansible.com/intro_installation.html)
+Minimal Ubuntu 16.04 LTS image built in VirtualBox from a `.iso` image and a kickstart config file that builds filesystems and disks according to [CIS Benchmark specifications](https://www.cisecurity.org/cis-benchmarks/).
 
-## Usage
+## chef-solo-provisioned
 
-Make sure all the required software (listed above) is installed, then cd to the directory containing this README.md file, and run:
+CentOS 7 image customized with the [chef-solo Packer provisioner](https://www.packer.io/docs/provisioners/chef-solo.html) and verified after build using inspec.
 
-    $ packer build centos7.json
+## Thanks
 
-After a few minutes, Packer should tell you the box was generated successfully.
-
-If you want to only build a box for one of the supported virtualization platforms (e.g. only build the VMware box), add `--only=vmware-iso` to the `packer build` command:
-
-    $ packer build --only=vmware-iso centos7.json
-    
-    $ packer build --only=virtualbox-iso centos7.json
-
-## Testing built boxes
-
-There's an included Vagrantfile that allows quick testing of the built Vagrant boxes. From this same directory, run one of the following commands after building the boxes:
-
-    # For VMware Fusion:
-    $ vagrant up vmware --provider=vmware_fusion
-    
-    # For VirtualBox:
-    $ vagrant up virtualbox --provider=virtualbox
-
-## License
-
-MIT license.
-
-## Author Information
-
-Created in 2014 by [Jeff Geerling](http://jeffgeerling.com/), author of [Ansible for DevOps](http://ansiblefordevops.com/).
+This work builds off of the examples [geerlingguy/packer-centos-7](https://github.com/geerlingguy/packer-centos-7) and [geerlingguy/packer-ubuntu-1604](https://github.com/geerlingguy/packer-ubuntu-1604).
